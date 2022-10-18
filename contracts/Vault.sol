@@ -13,22 +13,29 @@ contract Vault {
         _token = ERC20Permit(token_);
     }
 
-    function deposite(uint256 amount) external {
+    /**
+     * This function is used for typical deposit.
+     * User (Who deposit) must approve this contract (by his tokens) before calling this function .
+     */
+    function deposit(uint256 amount) external {
         _token.transferFrom(msg.sender, address(this), amount);
 
         emit Deposite(msg.sender, amount);
     }
 
     /**
-     * Anyone can call to this function
+     * Anyone can call this function.
+     * Don't care about who calls the function (who pays the fee).
+     * Don't need to approve before calling.
+     * The user (Who deposits - token's owner) needs to supply his correct signature.
      */
-    function depositeWithPermit(
+    function depositWithPermit(
         address owner, uint256 amount, uint256 deadline,
         uint8 v, bytes32 r, bytes32 s
     ) public
     {
         _token.permit(owner, address(this), amount, deadline, v, r, s);
-        _token.transferFrom(msg.sender, address(this), amount);
+        _token.transferFrom(owner, address(this), amount);
 
         emit DepositeWithPermit(owner, msg.sender, amount);
     }
