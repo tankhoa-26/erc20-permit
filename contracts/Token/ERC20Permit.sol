@@ -8,7 +8,6 @@ import "./ERC20.sol";
 import "../utils/ECDSA.sol";
 import "../utils/EIP712.sol";
 import "../utils/Counters.sol";
-import "hardhat/console.sol";
 
 /**
  * @dev Implementation of the ERC20 Permit extension allowing approvals to be made via signatures, as defined in

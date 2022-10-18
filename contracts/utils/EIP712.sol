@@ -3,8 +3,6 @@
 pragma solidity ^0.8.0;
 
 import "./ECDSA.sol";
-import "hardhat/console.sol";
-
 /**
  * @dev https://eips.ethereum.org/EIPS/eip-712[EIP 712] is a standard for hashing and signing of typed structured data.
  *
@@ -51,7 +49,6 @@ abstract contract EIP712 {
      * contract upgrade].
      */
     constructor(string memory name, string memory version) {
-        console.log("721: ", name);
         bytes32 hashedName = keccak256(bytes(name));
         bytes32 hashedVersion = keccak256(bytes(version));
         bytes32 typeHash = keccak256(
